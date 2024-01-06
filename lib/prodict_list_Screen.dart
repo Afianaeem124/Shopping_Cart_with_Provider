@@ -118,6 +118,10 @@ class _ProductListState extends State<ProductList> {
                                           alignment: Alignment.centerRight,
                                           child: InkWell(
                                             onTap: () {
+                                              cart.addCounter();
+                                              cart.addTotalPrice(double.parse(
+                                                  productPrice[index]
+                                                      .toString()));
                                               dbHelper!
                                                   .insert(Cart(
                                                       id: index,
@@ -149,12 +153,6 @@ class _ProductListState extends State<ProductList> {
 
                                                 ScaffoldMessenger.of(context)
                                                     .showSnackBar(snackBar);
-
-                                                cart.addTotalPrice(double.parse(
-                                                    productPrice[index]
-                                                        .toString()));
-
-                                                cart.addCounter();
                                               }).onError((error, stackTrace) {
                                                 print(error.toString());
                                                 final snackBar = SnackBar(
